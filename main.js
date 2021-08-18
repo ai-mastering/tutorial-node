@@ -2,6 +2,7 @@ const fs = require("fs");
 const _ = require("lodash");
 const Aimastering = require('aimastering');
 const program = require('commander');
+const srs = require('secure-random-string');
 
 // parse command line arguments
 program
@@ -43,14 +44,15 @@ const main = async function () {
     // configure API client
     const client = Aimastering.ApiClient.instance;
     const bearer = client.authentications['bearer'];
-    bearer.apiKey = process.env.AIMASTERING_ACCESS_TOKEN;
+    // bearer.apiKey = process.env.AIMASTERING_ACCESS_TOKEN;
+    bearer.apiKey = 'guest_' + srs({length: 32})
 
     // create api
     const audioApi = new Aimastering.AudioApi(client);
     const masteringApi = new Aimastering.MasteringApi(client);
 
     // upload input audio
-    const inputAudioData = fs.readFileSync(program.input);
+    const inputAudioData = fs.createReadStream(program.input);
     const inputAudio = await callApiDeferred(audioApi, audioApi.createAudio, {
         'file': inputAudioData,
     });
