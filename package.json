@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/ai-mastering/tutorialnode#readme",
   "dependencies": {
-    "aimastering": "git+https://github.com/ai-mastering/aimastering-js.git",
+    "aimastering": "^1.1.0",
     "commander": "^2.17.1",
     "lodash": "^4.17.21",
     "secure-random-string": "^1.1.3"
