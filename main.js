@@ -45,6 +45,9 @@ const main = async function () {
     const client = Aimastering.ApiClient.instance;
     const bearer = client.authentications['bearer'];
     // bearer.apiKey = process.env.AIMASTERING_ACCESS_TOKEN;
+
+    // API key must be 'guest_' + [arbitrary string]
+    // Unless the API key is leaked, the data will not be visible to others.
     bearer.apiKey = 'guest_' + srs({length: 32})
 
     // create api
